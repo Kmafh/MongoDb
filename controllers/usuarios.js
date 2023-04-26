@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 const getUsuario = async(req,res) =>{
     const id = req.params.id
-    console.log("DEntro");
+    
     try{
         const usuario = await Usuario.findById(id);
         if(!usuario){
@@ -61,7 +61,6 @@ const setUsuario = async(req,res) =>{
             const salt = bcrypt.genSaltSync();
             usuario.password = bcrypt.hashSync(password, salt)
             
-            console.log("Dentro")
             await usuario.save();
             res.json({
                 ok:true,
