@@ -27,5 +27,9 @@ const UsuarioSistema = Schema({
         default: false,
     },
 });
-
+// Metodo para no mostrar el password
+UsuarioSistema.method('toJSON', function() {
+    const { password, ...object } = this.toObject();
+    return object;
+})
 module.exports = model('Usuario', UsuarioSistema );
