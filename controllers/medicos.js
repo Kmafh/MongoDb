@@ -79,37 +79,22 @@ const setMedico = async(req,res) =>{
 
 const putMedico = async(req,res) =>{
 
-    // Validar token y comprobar si es el medico correcto
-
     const id = req.params.id
-    
     try{
         const exitUserDb = await Medico.findById(id);
         if(!exitUserDb){
             return res.status(400).json({
                 ok: false,
-                msg: 'No existe un medico por ese id'
+                msg: 'No existe un hospital por ese id'
             });
         }
         //Actualizar
-        const {password,google,email, ...camp} = req.body;
-
-        if(exitUserDb.email !== email){
-            
-            const existeEmail = await Medico.findOne({ email });
-            if (existeEmail){
-                return res.status(400).json({
-                    ok:false,
-                    msg: 'Ya existe el email para otro medico'
-                })
-            }
-        }
-
-        camp.email = email
-        const updUser = await Medico.findByIdAndUpdate(id, camp, { new: true});
+        const  nombre  = req.body;
+        
+        const updUser = await Medico.findByIdAndUpdate(id, nombre, { new: true});
         res.json({
             ok:true,
-            medico: updUser
+            hospital: updUser
         });
     } catch (error){
         console.log(error)

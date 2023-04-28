@@ -84,18 +84,9 @@ const putHospital = async(req,res) =>{
             });
         }
         //Actualizar
-        const {password,google,email, ...camp} = req.body;
-        if(exitUserDb.email !== email){
-            const existeEmail = await Hospital.findOne({ email });
-            if (existeEmail){
-                return res.status(400).json({
-                    ok:false,
-                    msg: 'Ya existe el email para otro hospital'
-                })
-            }
-        }
-        camp.email = email
-        const updUser = await Hospital.findByIdAndUpdate(id, camp, { new: true});
+        const  nombre  = req.body;
+        
+        const updUser = await Hospital.findByIdAndUpdate(id, nombre, { new: true});
         res.json({
             ok:true,
             hospital: updUser

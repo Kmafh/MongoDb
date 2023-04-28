@@ -2,9 +2,10 @@
     Path: /api/login
 */ 
 const { Router } = require('express');
-const { login, googleSingIn } = require('../controllers/auth');
+const { login, googleSingIn, renewToken } = require('../controllers/auth');
 const { body } = require('express-validator');
 const { validCamp } = require('../middlewares/valid-camp');
+const { validJWT } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
@@ -18,6 +19,8 @@ router.post('/google',[
     body('token','El token es obligatorio').not().isEmpty(),
     validCamp
 ],googleSingIn);
+
+router.get('/renew',validJWT,renewToken);
 
 
 module.exports = router;

@@ -27,8 +27,6 @@ router.put('/:id',
 [
     validJWT,
     body('nombre','El nombre es obligatorio').not().isEmpty(),
-    body('email','El email es obligatorio').isEmail(),
-    body('role','El rol es obligatorio').not().isEmpty(),
     validCamp
 ], putHospital);
 
