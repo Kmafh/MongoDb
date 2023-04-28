@@ -6,8 +6,6 @@ const generateJWT = ( id ) => {
         const payload = {
             id,
         };
-        console.log("fuera"+payload.id)
-        
         
         jwt.sign(payload,process.env.JWT_SECRET, {
             expiresIn: '2h'

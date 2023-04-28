@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongose');
+const { Schema, model } = require('mongoose');
 
 const MedicoSistema = Schema({
 
@@ -9,14 +9,21 @@ const MedicoSistema = Schema({
     img:{
         type: String,
     },
-    Usuario:{
-        type: Number,
-        required: true,
+    usuario:{
+        type: Schema.Types.ObjectId,
+        ref:'Usuario',
     },
-    Hospital:{
-        type: Number,
-        required: true,
+    hospitales:{
+        type: Schema.Types.ObjectId,
+        ref:'Hospital',
     },
+    
+},{
+    collection: 'Medicos'
 });
-
+// Metodo para no mostrar el password
+MedicoSistema.method('toJSON', function() {
+    const { _v, ...object } = this.toObject();
+    return object;
+})
 module.exports = model('Medico', MedicoSistema );
