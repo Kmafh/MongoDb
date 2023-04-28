@@ -2,7 +2,7 @@
     Path: /api/login
 */ 
 const { Router } = require('express');
-const { login } = require('../controllers/auth');
+const { login, googleSingIn } = require('../controllers/auth');
 const { body } = require('express-validator');
 const { validCamp } = require('../middlewares/valid-camp');
 
@@ -14,6 +14,10 @@ router.post('/',[
     validCamp
 ],login);
 
+router.post('/google',[
+    body('token','El token es obligatorio').not().isEmpty(),
+    validCamp
+],googleSingIn);
 
 
 module.exports = router;

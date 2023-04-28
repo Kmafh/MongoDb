@@ -7,6 +7,10 @@ const { dbConnection } = require('./db/config')
 const app = express();
 //CORS
 app.use(cors());
+
+//Carpeta Public
+
+app.use( express.static('public'));
 // Lectura y parseo del body
 app.use( express.json());
 
